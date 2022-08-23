@@ -1,6 +1,7 @@
 package com.fpr.fprservicebackend.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,11 @@ public class Member {
     @Column(name = "birthday", nullable = false)
     private String birthday;
 
+    @Builder
+    private Member(String username, String email, String password, String birthday) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+    }
 }
