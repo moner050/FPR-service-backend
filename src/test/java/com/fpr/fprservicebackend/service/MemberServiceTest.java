@@ -24,6 +24,8 @@ public class MemberServiceTest {
         MemberDto memberDto = new MemberDto();
         memberDto.setEmail("test@naver.com");
         memberDto.setPassword("1234");
+        memberDto.setAge(20);
+        memberDto.setJob("무직");
         memberDto.setUsername("테스트");
         memberDto.setBirthday("2022-04-07");
 
