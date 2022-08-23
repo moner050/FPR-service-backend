@@ -1,5 +1,6 @@
 package com.fpr.fprservicebackend.dto;
 
+import com.fpr.fprservicebackend.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +17,14 @@ public class MemberDto {
     private String password;
 
     private String birthday;
+
+    public Member toEntity(){
+        return Member.builder()
+                .username(username)
+                .email(email)
+                .password(password)
+                .birthday(birthday)
+                .build();
+    }
 
 }
