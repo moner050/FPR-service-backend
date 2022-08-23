@@ -19,7 +19,7 @@ public class MemberServiceTest {
     @Test
     @Transactional
     @DisplayName("회원가입 테스트")
-    void 회원가입() throws Exception {
+    void 회원가입(){
         // given
         MemberDto memberDto = new MemberDto();
         memberDto.setEmail("test@naver.com");
