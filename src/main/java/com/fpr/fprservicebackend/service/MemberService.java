@@ -2,17 +2,21 @@ package com.fpr.fprservicebackend.service;
 
 import com.fpr.fprservicebackend.domain.Member;
 import com.fpr.fprservicebackend.persistence.MemberRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class MemberService {
 
     private MemberRepository memberRepository;
+
+    @Autowired
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     // 맴버 등록
     @Transactional
