@@ -12,6 +12,10 @@ public class MemberDto {
 
     private String username;
 
+    private int age;
+
+    private String job;
+
     private String email;
 
     private String password;
@@ -23,6 +27,8 @@ public class MemberDto {
                 .username(username)
                 .email(email)
                 .password(password)
+                .age(age)
+                .job(job)
                 .birthday(birthday)
                 .build();
     }
