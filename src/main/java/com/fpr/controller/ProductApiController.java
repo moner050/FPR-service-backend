@@ -1,4 +1,4 @@
-package com.fpr.contoller;
+package com.fpr.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
