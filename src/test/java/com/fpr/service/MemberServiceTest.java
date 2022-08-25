@@ -2,6 +2,7 @@ package com.fpr.service;
 
 import com.fpr.domain.Member;
 import com.fpr.dto.MemberDto;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 @SpringBootTest
+@Slf4j
 public class MemberServiceTest {
 
     @Autowired
@@ -27,11 +29,14 @@ public class MemberServiceTest {
         memberDto.setAge(20);
         memberDto.setJob("무직");
         memberDto.setUsername("테스트");
-        memberDto.setBirthday("2022-04-07");
+        memberDto.setPhoneNumber("010-4555-2787");
 
         // when
         memberService.insertMember(memberDto.toEntity());
         Member findMember = memberService.getMember("테스트");
+
+        log.info("" + findMember.getMemberId());
+        log.info("" + findMember.getCreatedAt());
 
         // then
         Assertions.assertThat(memberDto.getEmail()).isEqualTo(findMember.getEmail());
