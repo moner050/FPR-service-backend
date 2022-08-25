@@ -1,4 +1,4 @@
-package com.fpr.fprservicebackend.domain;
+package com.fpr.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;

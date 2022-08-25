@@ -1,7 +1,7 @@
-package com.fpr.fprservicebackend.service;
+package com.fpr.service;
 
-import com.fpr.fprservicebackend.domain.Member;
-import com.fpr.fprservicebackend.dto.MemberDto;
+import com.fpr.domain.Member;
+import com.fpr.dto.MemberDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

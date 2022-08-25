@@ -1,6 +1,6 @@
-package com.fpr.fprservicebackend.persistence;
+package com.fpr.persistence;
 
-import com.fpr.fprservicebackend.domain.Member;
+import com.fpr.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

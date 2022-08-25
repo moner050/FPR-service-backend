@@ -1,6 +1,6 @@
-package com.fpr.fprservicebackend.controller;
+package com.fpr.controller;
 
-import com.fpr.fprservicebackend.service.MemberService;
+import com.fpr.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

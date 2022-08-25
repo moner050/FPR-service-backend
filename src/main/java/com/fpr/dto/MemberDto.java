@@ -1,6 +1,6 @@
-package com.fpr.fprservicebackend.dto;
+package com.fpr.dto;
 
-import com.fpr.fprservicebackend.domain.Member;
+import com.fpr.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
