@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "member")
-public class Member {
+public class Member extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +32,16 @@ public class Member {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "birthday", nullable = false)
-    private String birthday;
+    @Column(name = "phoneNumber", nullable = false)
+    private String phoneNumber;
 
     @Builder
-    private Member(String username, int age, String job, String email, String password, String birthday) {
+    private Member(String username, int age, String job, String email, String password, String phoneNumber) {
         this.username = username;
         this.age = age;
         this.job = job;
         this.email = email;
         this.password = password;
-        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
     }
 }
