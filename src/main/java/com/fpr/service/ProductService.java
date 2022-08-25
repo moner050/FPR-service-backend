@@ -1,7 +1,7 @@
 package com.fpr.service;
 
 import com.fpr.domain.Product;
-import com.fpr.persistance.ProductRepository;
+import com.fpr.persistence.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
