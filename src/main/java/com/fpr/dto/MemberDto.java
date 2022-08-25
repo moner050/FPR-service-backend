@@ -1,29 +1,30 @@
 package com.fpr.dto;
 
+import com.fpr.annotation.Tel;
 import com.fpr.domain.Member;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
+@AllArgsConstructor
 @Getter
-@Setter
 public class MemberDto{
+    // 계층간 이동시 데이터가 변조될 위험이 없이 하기위해 Setter 제거
 
     @NotNull
     private String username;
 
     @NotNull
-    @Size(min = 1, max = 200)
-    private int age;
+    @Max(150)
+    @Min(1)
+    private Integer age;
 
     @NotNull
     private String job;
 
     @NotNull
-    @Email
+    @Email(message = "유효하지 않은 이메일 형식입니다.")
     private String email;
 
     @NotNull
@@ -33,6 +34,7 @@ public class MemberDto{
     private String confirmPassword;
 
     @NotNull
+    @Tel
     private String phoneNumber;
 
     public Member toEntity(){
