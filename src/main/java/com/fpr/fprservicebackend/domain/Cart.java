@@ -1,11 +1,15 @@
 package com.fpr.fprservicebackend.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "CART")
@@ -14,9 +18,11 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
 
-    private Long memberId;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "member_Id")
+//    private Member member;
 
-    private Long productId;
+    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
-//    private List<Product> productList;
 }
