@@ -1,21 +1,12 @@
 package com.fpr.dto;
 
-import com.fpr.domain.ExpiryDate;
-import com.fpr.domain.ProductType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fpr.dto.property.Result;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 public class ProductRequestDto {
 
-    private Long productId;
-    private String savingsLimit;
-    private String accountNumber;
-    private float interestRate;
-    private ExpiryDate date;
-    private ProductType type;
+    private Result result;
 
 }

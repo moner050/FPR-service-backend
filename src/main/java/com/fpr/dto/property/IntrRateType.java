@@ -1,4 +1,4 @@
-package com.fpr.domain;
+package com.fpr.dto.property;
 
 import java.io.IOException;
 

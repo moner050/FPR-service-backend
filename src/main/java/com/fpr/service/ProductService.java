@@ -20,6 +20,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public void save(Product product) {
+
+        productRepository.save(product);
+
+    }
+
     public Optional findOne(Long productId) {
         return productRepository.findById(productId);
     }
@@ -28,7 +34,4 @@ public class ProductService {
 
     }
 
-    public void searchProduct() {
-        productRepository.find
-    }
 }
