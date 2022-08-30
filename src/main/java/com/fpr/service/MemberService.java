@@ -1,13 +1,12 @@
 package com.fpr.service;
 
 import com.fpr.domain.Member;
+import com.fpr.dto.MemberResponseDto;
 import com.fpr.persistence.MemberRepository;
+import com.fpr.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +22,17 @@ public class MemberService {
 
     // 맴버 조회
     @Transactional(readOnly = true)
-    public Member getMember(String username) {
-        Optional<Member> getMember = memberRepository.findByUsername(username);
-        return getMember.orElseThrow(() -> new NoSuchElementException("검색된 맴버가 없습니다."));
+    public MemberResponseDto getMemberInfo(String email) {
+        return memberRepository.findByEmail(email)
+                .map(MemberResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
     }
 
+    // 현재 SecurityContext 에 있는 유저정보 가져오기
+    @Transactional(readOnly = true)
+    public MemberResponseDto getMyInfo() {
+        return memberRepository.findById(SecurityUtil.getCurrentMemberId())
+                .map(MemberResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+    }
 }
