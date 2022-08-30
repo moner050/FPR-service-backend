@@ -28,8 +28,8 @@ public class AuthService {
         if (memberRepository.existsByEmail(memberRequestDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
-        // 회원가입 처리
-        Member member = memberRequestDto.toEntity(passwordEncoder);
+
+        Member member = memberRequestDto.toMember(passwordEncoder);
         MemberResponseDto.of(memberRepository.save(member));
 
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
