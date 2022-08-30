@@ -26,7 +26,8 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(FprApiInfo())
-                .tags( new Tag("member-controller", "회원가입"));
+                .tags( new Tag("member-controller", "맴버정보 조회"))
+                .tags( new Tag("auth-controller", "회원가입/로그인 토큰 재발급"));
     }
 
     private ApiInfo FprApiInfo(){
