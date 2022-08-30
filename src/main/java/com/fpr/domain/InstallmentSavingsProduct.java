@@ -15,7 +15,7 @@ public class InstallmentSavingsProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sproductId")
+    @Column(name = "isproductId")
     private Long id;
 
     private String dcls_month;

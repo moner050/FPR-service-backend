@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ProductApiController {
+public class SavingsApiController {
 
     private final SavingsService savingsService;
 

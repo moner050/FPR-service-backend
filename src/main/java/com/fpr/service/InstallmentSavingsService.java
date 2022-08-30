@@ -1,9 +1,10 @@
 package com.fpr.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fpr.domain.InstallmentSavingsProduct;
 import com.fpr.domain.SavingsProduct;
-import com.fpr.dto.SavingsResponseDto;
-import com.fpr.persistence.SavingsRepository;
+import com.fpr.dto.InstallmentSavingsResponseDto;
+import com.fpr.persistence.InstallmentSavingsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -14,20 +15,22 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SavingsService {
+public class InstallmentSavingsService {
 
-    private final SavingsRepository savingsRepository;
+    private final InstallmentSavingsRepository installmentSavingsRepository;
 
-    public List<SavingsProduct> list(){
-        return savingsRepository.findAll();
+    public List<InstallmentSavingsProduct> list(){
+        return installmentSavingsRepository.findAll();
     }
 
-    public void apiSave(SavingsProduct savingsProduct) throws JsonProcessingException {
+    public void apiSave(InstallmentSavingsProduct installmentSavingsProduct) throws JsonProcessingException {
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -41,10 +44,10 @@ public class SavingsService {
 
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(url + "?" + "auth=41a94be07dfa9f03716566379d2d2371" + "&" + "topFinGrpNo=020000&pageNo=1").build();
 
-            ResponseEntity<SavingsResponseDto> responseEntity = rt.exchange(uri.toString(), HttpMethod.GET, entity, SavingsResponseDto.class);
+            ResponseEntity<InstallmentSavingsResponseDto> responseEntity = rt.exchange(uri.toString(), HttpMethod.GET, entity, InstallmentSavingsResponseDto.class);
             HttpStatus statusCode = HttpStatus.valueOf(responseEntity.getStatusCodeValue());
             HttpHeaders header = responseEntity.getHeaders();
-            SavingsResponseDto body = responseEntity.getBody();
+            InstallmentSavingsResponseDto body = responseEntity.getBody();
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
@@ -57,22 +60,22 @@ public class SavingsService {
             System.out.println(e.toString());
         }
 
-        savingsRepository.save(savingsProduct);
+        installmentSavingsRepository.save(installmentSavingsProduct);
 
     }
 
     @Transactional(readOnly = true)
-    public SavingsProduct findOne(Long sProductId) {
-        Optional<SavingsProduct> product = savingsRepository.findById(sProductId);
-        return product.orElseGet(() -> new SavingsProduct());
+    public InstallmentSavingsProduct findOne(Long isproductId) {
+        Optional<InstallmentSavingsProduct> product = installmentSavingsRepository.findById(isproductId);
+        return product.orElseGet(() -> new InstallmentSavingsProduct());
     }
 
 //    public void recommendProduct(Member member) {
 //        productRepository.recommend(member.getAge(), member.getJob());
 //    }
 
-    public List<SavingsProduct> searchProduct(SavingsProduct savingsProduct) {
-        return savingsRepository.search(savingsProduct.getKor_co_nm());
+    public List<SavingsProduct> searchProduct(InstallmentSavingsProduct installmentSavingsProduct) {
+        return installmentSavingsRepository.search(installmentSavingsProduct.getKor_co_nm());
     }
 
 }

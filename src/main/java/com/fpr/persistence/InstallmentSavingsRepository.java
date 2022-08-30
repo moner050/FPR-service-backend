@@ -1,12 +1,13 @@
 package com.fpr.persistence;
 
+import com.fpr.domain.InstallmentSavingsProduct;
 import com.fpr.domain.Member;
 import com.fpr.domain.SavingsProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<SavingsProduct, Long> {
+public interface InstallmentSavingsRepository extends JpaRepository<InstallmentSavingsProduct, Long> {
 
     Member recommend(Integer age, String job);
 
