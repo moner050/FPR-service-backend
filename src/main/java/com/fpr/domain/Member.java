@@ -16,7 +16,7 @@ public class Member extends BaseTime{
     @Id
     @Column(name = "memberId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -50,4 +50,5 @@ public class Member extends BaseTime{
         this.phoneNumber = phoneNumber;
         this.authority = authority;
     }
+
 }
