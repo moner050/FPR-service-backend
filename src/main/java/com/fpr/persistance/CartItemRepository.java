@@ -1,6 +1,7 @@
-package com.fpr.fprservicebackend.persistance;
+package com.fpr.persistance;
 
-import com.fpr.fprservicebackend.domain.CartItem;
+import com.fpr.domain.Cart;
+import com.fpr.domain.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-
     Optional<CartItem> findByCartIdAndProductId(Long cartId, Long productId);
-
-    List<CartItem> findByProductId(Long productId);
-
-//    void deleteAllByCartId(Long cartId);
+    List<CartItem> findAllByCart(Cart cart);
 }

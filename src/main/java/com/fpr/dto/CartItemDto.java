@@ -1,4 +1,4 @@
-package com.fpr.fprservicebackend.dto;
+package com.fpr.dto;
 
 import lombok.Getter;
 import lombok.Setter;

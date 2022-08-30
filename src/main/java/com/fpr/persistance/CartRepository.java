@@ -1,9 +1,10 @@
-package com.fpr.fprservicebackend.persistance;
+package com.fpr.persistance;
 
-import com.fpr.fprservicebackend.domain.Cart;
+import com.fpr.domain.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
