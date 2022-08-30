@@ -41,24 +41,30 @@ public class TokenProvider {
 
         long now = (new Date()).getTime();
 
+        // Header
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("typ", "JWT");
+
         // Payload
         Map<String, Object> payloads = new HashMap<>();
-        payloads.put("memberId", "1");
-        payloads.put("age", 3);
+        payloads.put("memberId", authentication.getName());
+        payloads.put("auth", authorities);
+
+        log.info(authentication.getName());
 
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
-                .setSubject(authentication.getName())       // payload "sub": "name"
-                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+                .setHeader(headers)
                 .setClaims(payloads)
                 .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
-                .signWith(key, SignatureAlgorithm.HS512)    // header "alg": "HS512"
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
         // Refresh Token 생성
         String refreshToken = Jwts.builder()
                 .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+                .setHeader(headers)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
