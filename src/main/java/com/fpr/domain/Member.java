@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Member extends BaseTime{
 
     @Id
+    @Column(name = "memberId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
@@ -35,13 +36,18 @@ public class Member extends BaseTime{
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
+    @Column(name = "authority", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
     @Builder
-    private Member(String username, int age, String job, String email, String password, String phoneNumber) {
+    private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {
         this.username = username;
         this.age = age;
         this.job = job;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.authority = authority;
     }
 }
