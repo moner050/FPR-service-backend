@@ -1,8 +1,6 @@
 package com.fpr.domain;
 
 
-import com.fpr.dto.property.IntrRateType;
-import com.fpr.dto.property.IntrRateTypeNm;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,11 +11,11 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class InstallmentSavingsProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId")
+    @Column(name = "sproductId")
     private Long id;
 
     private String dcls_month;
@@ -36,11 +34,12 @@ public class Product {
     private String dcls_end_day;
     private String fin_co_subm_day;
 
-    private IntrRateType intr_rate_type;
-    private IntrRateTypeNm intr_rate_type_nm;
+    private String intr_rate_type;
+    private String intr_rate_type_nm;
+    private String rsrv_type;
+    private String rsrv_type_nm;
     private String save_trm;
     private double intr_rate;
     private double intr_rate2;
-
 
 }
