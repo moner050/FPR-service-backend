@@ -69,7 +69,6 @@ public class FprServiceBackendApplication {
                 depositRepository.save(deposit);
             }
 
-
             url = "http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json";
             uriComponents = UriComponentsBuilder.fromHttpUrl(url)
                     .queryParam("auth", "41a94be07dfa9f03716566379d2d2371")
@@ -111,8 +110,6 @@ public class FprServiceBackendApplication {
                         .build();
 
                 savingRepository.save(saving);
-
-
             }
         };
     }
