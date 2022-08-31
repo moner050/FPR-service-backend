@@ -6,9 +6,14 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class InstallmentSavingsResponseDto {
+public class InstallmentSavingsResponseDto<T> {
 
     private Result result;
+    int status;
+    T data;
+
+    public InstallmentSavingsResponseDto(T value, T i) {
+    }
 
     @Getter @Setter
     public class Result {

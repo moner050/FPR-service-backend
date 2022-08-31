@@ -72,7 +72,7 @@ public class SavingsService {
 //    }
 
     public List<SavingsProduct> searchProduct(SavingsProduct savingsProduct) {
-        return savingsRepository.search(savingsProduct.getKor_co_nm());
+        return savingsRepository.findBykorCoNm(savingsProduct.getKorCoNm());
     }
 
 }

@@ -2,7 +2,6 @@ package com.fpr.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fpr.domain.InstallmentSavingsProduct;
-import com.fpr.domain.SavingsProduct;
 import com.fpr.dto.InstallmentSavingsResponseDto;
 import com.fpr.persistence.InstallmentSavingsRepository;
 import lombok.RequiredArgsConstructor;
@@ -74,8 +73,8 @@ public class InstallmentSavingsService {
 //        productRepository.recommend(member.getAge(), member.getJob());
 //    }
 
-    public List<SavingsProduct> searchProduct(InstallmentSavingsProduct installmentSavingsProduct) {
-        return installmentSavingsRepository.search(installmentSavingsProduct.getKor_co_nm());
+    public List<InstallmentSavingsProduct> searchProduct(InstallmentSavingsProduct installmentSavingsProduct) {
+        return installmentSavingsRepository.findBykorCoNm(installmentSavingsProduct.getKorCoNm());
     }
 
 }

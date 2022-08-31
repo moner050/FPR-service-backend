@@ -1,14 +1,18 @@
 package com.fpr.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter @Setter
-public class SavingsResponseDto {
+public class SavingsResponseDto<T> {
 
     private Result result;
+    int status;
+    T data;
+
+    public SavingsResponseDto(T value, T i) {
+    }
 
     @Getter @Setter
     public class Result {
