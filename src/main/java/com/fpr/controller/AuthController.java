@@ -25,7 +25,7 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(loginDto));
     }
 
-    @PostMapping("/reissue")
+    @PostMapping("/refresh")
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
