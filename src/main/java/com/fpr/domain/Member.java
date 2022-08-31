@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Member extends BaseTime{
 
     @Id
-    @Column(name = "memberId")
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,7 +33,7 @@ public class Member extends BaseTime{
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "phoneNumber", nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Column(name = "authority", nullable = false)

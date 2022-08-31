@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "refreshToken")
+@Table(name = "refresh_token")
 @Entity
 public class RefreshToken {
 

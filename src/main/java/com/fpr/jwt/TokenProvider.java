@@ -41,38 +41,26 @@ public class TokenProvider {
 
         long now = (new Date()).getTime();
 
-        // Header
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("typ", "JWT");
-
-        // Payload
-        Map<String, Object> payloads = new HashMap<>();
-        payloads.put("memberId", authentication.getName());
-        payloads.put("auth", authorities);
-
-        log.info(authentication.getName());
-
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
-                .setHeader(headers)
-                .setClaims(payloads)
-                .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .setSubject(authentication.getName())       // 맴버PK값    "sub"  : "1"
+                .claim(AUTHORITIES_KEY, authorities)        // 권한        "auth" : "ROLE_USER"
+                .setExpiration(accessTokenExpiresIn)        // 유효기간     "exp"  : 1661914126
+                .signWith(key, SignatureAlgorithm.HS512)    // 알고리즘     "alg"  : "HS512"
                 .compact();
 
         // Refresh Token 생성
-        String refreshToken = Jwts.builder()
-                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
-                .setHeader(headers)
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
+//        String refreshToken = Jwts.builder()
+//                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+//                .signWith(key, SignatureAlgorithm.HS512)
+//                .compact();
 
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-                .refreshToken(refreshToken)
+//                .refreshToken(refreshToken)
                 .build();
     }
 
