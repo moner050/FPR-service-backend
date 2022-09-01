@@ -1,14 +1,12 @@
 package com.fpr.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

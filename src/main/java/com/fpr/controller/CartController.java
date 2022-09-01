@@ -15,23 +15,15 @@ public class CartController {
 
     // 장바구니 담기
 //    @PostMapping("/cart/{memberId}/{productId}")
-//    public String addCart(@PathVariable Long memberId, @PathVariable Long productId) {
+//    public CartItem addCart(@PathVariable Long memberId, @PathVariable Long productId) {
 //
-//        Member member = memberService.findById(memberId);
-//        Product product = productService.findById(productId);
-//
-//        cartService.addCart(member, product);
-//
-//        return "";
 //    }
 
-    // 장바구니 목록
+    // 장바구니 목록 조회
     @GetMapping("/cart/{memberId}")
     public List<CartItem> getCartItemList(@PathVariable Long memberId) {
-        List<CartItem> cartItemList = cartService.getCartItemList(memberId);
-
+        return cartService.getCartItemList(memberId);
     }
-
 
     // 장바구니 삭제
     @DeleteMapping("/cart/{cartId}")

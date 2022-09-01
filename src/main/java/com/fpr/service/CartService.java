@@ -2,7 +2,6 @@ package com.fpr.service;
 
 import com.fpr.domain.Cart;
 import com.fpr.domain.CartItem;
-import com.fpr.dto.CartDto;
 import com.fpr.persistance.CartItemRepository;
 import com.fpr.persistance.CartRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,21 +19,14 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
 //    private final ProductRepository productRepository;
+//    private final MemberRepository memberRepository;
 
     // 장바구니 담기
-//    @Transactional
-//    public void addCart(Long memberId, Long productId) {
-//        Cart cart = cartRepository.findByMemberId(memberId);
-//
-//        cartRepository.save();
-//    }
 
-    // 장바구니 목록
+
+    // 장바구니 목록 조회
     public List<CartItem> getCartItemList(Long memberId) {
-
-        List<CartItem> cartItems = cartItemRepository.findAll();
-
-        return cartItems;
+        return cartItemRepository.findAllByMemberMemberId(memberId);
     }
 
     // 장바구니 삭제

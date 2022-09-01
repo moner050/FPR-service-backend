@@ -1,6 +1,9 @@
 package com.fpr.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,18 +12,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class CartItem {
+public class BookmarkItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartItemId;
+    private Long bookmarkItemId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_Id")
-    private Cart cart;
+    @JoinColumn(name = "bookmark_Id")
+    private Bookmark bookmark;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "product_Id")
 //    private Product product;
-
 }
