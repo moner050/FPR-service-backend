@@ -1,9 +1,7 @@
 package com.fpr.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fpr.domain.SavingsProduct;
 import com.fpr.dto.savings.SavingsResponseDto;
-import com.fpr.service.SavingsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -26,11 +24,6 @@ public class SavingsApiController {
         return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    @GetMapping("/savingsapi")
-    public SavingsResponseDto callAPI() throws JsonProcessingException {
-        savingsService.savingsApiSave();
-        return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
-    }
 
     @PostMapping("/savingsproduct/detail")
     public SavingsResponseDto productDetail(Long sProductId, Model model) {

@@ -1,9 +1,7 @@
 package com.fpr.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fpr.domain.InstallmentSavingsProduct;
 import com.fpr.dto.installment.InstallmentSavingsResponseDto;
-import com.fpr.service.InstallmentSavingsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -23,12 +21,6 @@ public class InstallmentSavingsApiController {
     public InstallmentSavingsResponseDto findAll(Model model) {
         List<InstallmentSavingsProduct> installmentsavingsProducts = installmentSavingsService.list();
         model.addAttribute("installmentsavingsProducts", installmentsavingsProducts);
-        return new InstallmentSavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
-    }
-
-    @GetMapping("/api")
-    public InstallmentSavingsResponseDto callAPI() throws JsonProcessingException {
-        installmentSavingsService.apiSave();
         return new InstallmentSavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
