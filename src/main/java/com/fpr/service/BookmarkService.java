@@ -1,10 +1,8 @@
 package com.fpr.service;
 
 import com.fpr.domain.Bookmark;
-import com.fpr.domain.Cart;
-import com.fpr.domain.CartItem;
-import com.fpr.persistance.BookmarkItemRepository;
-import com.fpr.persistance.BookmarkRepository;
+import com.fpr.persistence.BookmarkItemRepository;
+import com.fpr.persistence.BookmarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

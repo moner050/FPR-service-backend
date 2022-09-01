@@ -1,4 +1,4 @@
-package com.fpr.persistance;
+package com.fpr.persistence;
 
 import com.fpr.domain.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;

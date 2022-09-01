@@ -1,16 +1,13 @@
 package com.fpr.service;
 
-import com.fpr.domain.Cart;
 import com.fpr.domain.CartItem;
-import com.fpr.persistance.CartItemRepository;
-import com.fpr.persistance.CartRepository;
+import com.fpr.persistence.CartItemRepository;
+import com.fpr.persistence.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package com.fpr.persistance;
+package com.fpr.persistence;
 
 import com.fpr.domain.Bookmark;
 import com.fpr.domain.BookmarkItem;
