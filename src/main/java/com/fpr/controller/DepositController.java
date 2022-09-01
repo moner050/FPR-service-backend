@@ -1,7 +1,8 @@
 package com.fpr.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fpr.dto.installment.InstallmentSavingsResponseDto;
+import com.fpr.domain.Deposit;
+import com.fpr.dto.DepositResponseDto;
+import com.fpr.service.DepositService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -13,26 +14,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class InstallmentSavingsApiController {
+public class DepositController {
 
-    private final InstallmentSavingsService installmentSavingsService;
+    private final DepositService depositService;
 
     @GetMapping("/product/list")
-    public InstallmentSavingsResponseDto findAll(Model model) {
-        List<InstallmentSavingsProduct> installmentsavingsProducts = installmentSavingsService.list();
-        model.addAttribute("installmentsavingsProducts", installmentsavingsProducts);
-        return new InstallmentSavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public DepositResponseDto findAll(Model model) {
+        List<Deposit> deposits = depositService.list();
+        model.addAttribute("deposits", deposits);
+        return new DepositResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     @PostMapping("/product/detail")
-    public InstallmentSavingsResponseDto productDetail(Long isproductId, Model model) {
-        model.addAttribute("installmentsavingsProducts", installmentSavingsService.findOne(isproductId));
-        return new InstallmentSavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public DepositResponseDto productDetail(Long id, Model model) {
+        model.addAttribute("deposits", depositService.findOne(id));
+        return new DepositResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     @PostMapping("/product/{id}")
-    public InstallmentSavingsResponseDto searchProduct(Model model, InstallmentSavingsProduct installmentsavingsProducts) {
-        model.addAttribute("installmentsavingsProducts", installmentSavingsService.searchProduct(installmentsavingsProducts));
-        return new InstallmentSavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public DepositResponseDto searchProduct(Model model, Deposit deposit) {
+        model.addAttribute("deposits", depositService.searchProduct(deposit));
+        return new DepositResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 }
