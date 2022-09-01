@@ -2,7 +2,8 @@ package com.fpr.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fpr.domain.SavingsProduct;
-import com.fpr.dto.SavingsResponseDto;
+import com.fpr.dto.savings.SavingsRequestDto;
+import com.fpr.dto.savings.SavingsResponseDto;
 import com.fpr.persistence.SavingsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
@@ -14,7 +15,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -27,7 +31,7 @@ public class SavingsService {
         return savingsRepository.findAll();
     }
 
-    public void apiSave(SavingsProduct savingsProduct) throws JsonProcessingException {
+    public void savingsApiSave() throws JsonProcessingException {
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -46,6 +50,27 @@ public class SavingsService {
             HttpHeaders header = responseEntity.getHeaders();
             SavingsResponseDto body = responseEntity.getBody();
 
+            SavingsProduct savingsProduct = new SavingsProduct();
+
+            List<SavingsRequestDto.OptionList> optionLists = body.getResult().getOptionList();
+
+            List<SavingsProduct> products = body.getResult().getBaseList()
+                    .stream()
+                    .map(SavingsRequestDto.BaseList::toEntity)
+                    .collect(Collectors.toList());
+
+
+
+            optionLists.forEach(optionList -> {
+                savingsProduct.setIntrRateType(optionList.getIntrRateType());
+                savingsProduct.setIntrRateTypeNm(optionList.getIntrRateTypeNm());
+                savingsProduct.setSaveTrm(optionList.getSaveTrm());
+                savingsProduct.setIntrRate(optionList.getIntrRate());
+                savingsProduct.setIntrRate2(optionList.getIntrRate2());
+
+            });
+
+            savingsRepository.saveAll(products);
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
             result.put("body", e.getStatusText());
@@ -57,7 +82,6 @@ public class SavingsService {
             System.out.println(e.toString());
         }
 
-        savingsRepository.save(savingsProduct);
 
     }
 
