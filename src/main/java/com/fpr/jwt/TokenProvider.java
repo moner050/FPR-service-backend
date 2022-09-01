@@ -51,16 +51,16 @@ public class TokenProvider {
                 .compact();
 
         // Refresh Token 생성
-        String refreshToken = Jwts.builder()
-                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
+//        String refreshToken = Jwts.builder()
+//                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+//                .signWith(key, SignatureAlgorithm.HS512)
+//                .compact();
 
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-                .refreshToken(refreshToken)
+//                .refreshToken(refreshToken)
                 .build();
     }
 
