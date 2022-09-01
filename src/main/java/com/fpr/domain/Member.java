@@ -11,11 +11,12 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "member")
-public class Member {
+public class Member extends BaseTime{
 
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -32,16 +33,22 @@ public class Member {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "birthday", nullable = false)
-    private String birthday;
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "authority", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 
     @Builder
-    private Member(String username, int age, String job, String email, String password, String birthday) {
+    private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {
         this.username = username;
         this.age = age;
         this.job = job;
         this.email = email;
         this.password = password;
-        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.authority = authority;
     }
+
 }
