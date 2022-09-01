@@ -1,7 +1,8 @@
 package com.fpr.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fpr.dto.savings.SavingsResponseDto;
+import com.fpr.domain.Saving;
+import com.fpr.dto.SavingResponseDto;
+import com.fpr.service.SavingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -13,27 +14,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class SavingsApiController {
+public class SavingiController {
 
-    private final SavingsService savingsService;
+    private final SavingService savingService;
 
     @GetMapping("/savingsproduct/list")
-    public SavingsResponseDto findAll(Model model) {
-        List<SavingsProduct> savingsProducts = savingsService.list();
-        model.addAttribute("savingsProducts", savingsProducts);
-        return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public SavingResponseDto findAll(Model model) {
+        List<Saving> savings = savingService.list();
+        model.addAttribute("savings", savings);
+        return new SavingResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-
     @PostMapping("/savingsproduct/detail")
-    public SavingsResponseDto productDetail(Long sProductId, Model model) {
-        model.addAttribute("savingsProducts", savingsService.findOne(sProductId));
-        return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public SavingResponseDto productDetail(Long id, Model model) {
+        model.addAttribute("saving", savingService.findOne(id));
+        return new SavingResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
     @PostMapping("/savingsproduct/{id}")
-    public SavingsResponseDto searchProduct(Model model, SavingsProduct savingsProduct) {
-        model.addAttribute("searchProduct", savingsService.searchProduct(savingsProduct));
-        return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    public SavingResponseDto searchProduct(Model model, Saving saving) {
+        model.addAttribute("saving", savingService.searchProduct(saving));
+        return new SavingResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 }
