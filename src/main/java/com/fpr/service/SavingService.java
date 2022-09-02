@@ -1,5 +1,6 @@
 package com.fpr.service;
 
+import com.fpr.domain.Deposit;
 import com.fpr.domain.Saving;
 import com.fpr.persistence.SavingRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +22,21 @@ public class SavingService {
     }
 
     @Transactional(readOnly = true)
-    public Saving findOne(Long id) {
+    public Saving searchOne(Long id) {
         Optional<Saving> product = savingRepository.findById(id);
-        return product.orElseGet(() -> new Saving());
+        return product.orElseThrow(() -> new RuntimeException("검색된 제품이 없습니다"));
     }
 
-//    public void recommendProduct(Member member) {
-//        savingRepository.recommend(member.getAge(), member.getJob());
-//    }
+    @Transactional
+    public List<Saving> searchAll() {
+        List<Saving> savings = savingRepository.findAll();
+        if(savings.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return savings;
+    }
 
-    public List<Saving> searchProduct(Saving savingsProduct) {
-        return savingRepository.findBykorCoNm(savingsProduct.getKorCoNm());
+    public List<Saving> searchProduct(String korCoNm) {
+        List<Saving> savings = savingRepository.findByKorCoNmContaining(korCoNm);
+        if(savings.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return savings;
     }
 }

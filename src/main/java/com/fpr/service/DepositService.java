@@ -16,21 +16,24 @@ public class DepositService {
 
     private final DepositRepository depositRepository;
 
-    public List<Deposit> list(){
-        return depositRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<Deposit> searchAll() {
+        List<Deposit> deposit = depositRepository.findAll();
+        if(deposit.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return deposit;
     }
 
     @Transactional(readOnly = true)
-    public Deposit findOne(Long id) {
+    public Deposit searchOne(Long id) {
         Optional<Deposit> product = depositRepository.findById(id);
-        return product.orElseGet(() -> new Deposit());
+        return product.orElseThrow(() -> new RuntimeException("검색된 제품이 없습니다"));
     }
 
-//    public void recommendProduct(Member member) {
-//        depositRepository.recommend(member.getAge(), member.getJob());
-//    }
-
-    public List<Deposit> searchProduct(Deposit deposit) {
-        return depositRepository.findBykorCoNm(deposit.getKorCoNm());
+    @Transactional
+    public List<Deposit> searchProduct(String korCoNm) {
+        List<Deposit> deposit = depositRepository.findByKorCoNmContaining(korCoNm);
+        if(deposit.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return deposit;
     }
+
 }
