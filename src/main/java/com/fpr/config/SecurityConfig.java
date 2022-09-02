@@ -43,6 +43,7 @@ public class SecurityConfig {
 
                 .and()
                 .csrf().disable()
+                .cors().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
