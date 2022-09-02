@@ -18,7 +18,7 @@ public class DepositController {
 
     private final DepositService depositService;
 
-    @GetMapping("/product/list")
+    @GetMapping("/deposit")
     public DepositResponseDto findAll(Model model) {
         List<Deposit> deposits = depositService.list();
         model.addAttribute("deposits", deposits);
@@ -31,7 +31,7 @@ public class DepositController {
         return new DepositResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
-    @PostMapping("/product/{id}")
+    @GetMapping("/product/{id}")
     public DepositResponseDto searchProduct(Model model, Deposit deposit) {
         model.addAttribute("deposits", depositService.searchProduct(deposit));
         return new DepositResponseDto<Integer>(HttpStatus.OK.value(), 1);
