@@ -4,9 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -15,8 +13,6 @@ public class Deposit {
 
     @Id
     private Long id;
-
-
     private String dclsMonth;
     private String finCoNo;
     private String finPrdtCd;
@@ -34,16 +30,25 @@ public class Deposit {
     private String dclsEndDay;
     private String finCoSubmDay;
 
+    private String img;
+
     private String intrRateType;
     private String intrRateTypeNm;
     private String saveTrm;
     private double intrRate;
     private double intrRate2;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Builder
     private Deposit (Long id, String dclsMonth, String finCoNo, String finPrdtCd, String korCoNm, String finPrdtNm, String joinWay,
                      String mtrtInt, String spclCnd, String joinDeny, String joinMember, String etcNote, Long maxLimit, String dclsStrtDay,
-                     String dclsEndDay, String finCoSubmDay, String intrRateType, String intrRateTypeNm, String saveTrm, double intrRate, double intrRate2){
+                     String dclsEndDay, String finCoSubmDay, String img, String intrRateType, String intrRateTypeNm, String saveTrm, double intrRate, double intrRate2){
         this.id = id;
         this.dclsMonth = dclsMonth;
         this.finCoNo = finCoNo;
@@ -60,6 +65,7 @@ public class Deposit {
         this.dclsStrtDay = dclsStrtDay;
         this.dclsEndDay = dclsEndDay;
         this.finCoSubmDay = finCoSubmDay;
+        this.img = img;
         this.intrRateType = intrRateType;
         this.intrRateTypeNm = intrRateTypeNm;
         this.saveTrm = saveTrm;
