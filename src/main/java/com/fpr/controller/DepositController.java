@@ -29,7 +29,7 @@ public class DepositController {
     @PostMapping("/product/deposit/detail")
     public ResponseEntity<Deposit> depositDetail(Long id) {
         Deposit deposit = depositService.searchOne(id);
-        return new ResponseEntity(deposit, HttpStatus.OK)
+        return new ResponseEntity(deposit, HttpStatus.OK);
     }
 
     @PostMapping("/product/deposit/{korCoNm}")
