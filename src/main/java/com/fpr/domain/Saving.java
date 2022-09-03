@@ -4,9 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,58 +14,67 @@ public class Saving {
     @Id
     private Long id;
 
-    private String dcls_month;
-    private String fin_co_no;
-    private String fin_prdt_cd;
-    private String kor_co_nm;
-    private String fin_prdt_nm;
-    private String join_way;
-    private String mtrt_int;
-    private String spcl_cnd;
-    private String join_deny;
-    private String join_member;
-    private String etc_note;
-    private Long max_limit;
-    private String dcls_strt_day;
+    private String dclsMonth;
+    private String finCoNo;
+    private String finPrdtCd;
+    private String korCoNm;
+    private String finPrdtNm;
+    private String joinWay;
+    private String mtrtInt;
+    private String spclCnd;
+    private String joinDeny;
+    private String joinMember;
+    private String etcNote;
+    private Long maxLimit;
+    private String dclsStrtDay;
     @Column(nullable = true)
-    private String dcls_end_day;
-    private String fin_co_subm_day;
+    private String dclsEndDay;
+    private String finCoSubmDay;
 
-    private String intr_rate_type;
-    private String intr_rate_type_nm;
-    private String rsrv_type;
-    private String rsrv_type_nm;
-    private String save_trm;
-    private double intr_rate;
-    private double intr_rate2;
+    private String img;
 
+    private String intrRateType;
+    private String intrRateTypeNm;
+    private String rsrvType;
+    private String rsrvTypeNm;
+    private String saveTrm;
+    private double intrRate;
+    private double intrRate2;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     @Builder
-    private Saving (Long id, String dcls_month, String fin_co_no, String fin_prdt_cd, String kor_co_nm, String fin_prdt_nm, String join_way,
-                     String mtrt_int, String spcl_cnd, String join_deny, String join_member, String etc_note, Long max_limit, String dcls_strt_day,
-                     String dcls_end_day, String fin_co_subm_day, String intr_rate_type, String intr_rate_type_nm, String rsrv_type, String rsrv_type_nm, String save_trm, double intr_rate, double intr_rate2){
+    private Saving (Long id, String dclsMonth, String finCoNo, String finPrdtCd, String korCoNm, String finPrdtNm, String joinWay,
+                     String mtrtInt, String spclCnd, String joinDeny, String joinMember, String etcNote, Long maxLimit, String dclsStrtDay,
+                     String dclsEndDay, String finCoSubmDay, String img, String intrRateType, String intrRateTypeNm, String rsrvType, String rsrvTypeNm, String saveTrm, double intrRate, double intrRate2){
         this.id = id;
-        this.dcls_month = dcls_month;
-        this.fin_co_no = fin_co_no;
-        this.fin_prdt_cd = fin_prdt_cd;
-        this.kor_co_nm = kor_co_nm;
-        this.fin_prdt_nm = fin_prdt_nm;
-        this.join_way = join_way;
-        this.mtrt_int = mtrt_int;
-        this.spcl_cnd = spcl_cnd;
-        this.join_deny = join_deny;
-        this.join_member = join_member;
-        this.etc_note = etc_note;
-        this.max_limit = max_limit;
-        this.dcls_strt_day = dcls_strt_day;
-        this.dcls_end_day = dcls_end_day;
-        this.fin_co_subm_day = fin_co_subm_day;
-        this.intr_rate_type = intr_rate_type;
-        this.intr_rate_type_nm = intr_rate_type_nm;
-        this.rsrv_type = rsrv_type;
-        this.rsrv_type_nm = rsrv_type_nm;
-        this.save_trm = save_trm;
-        this.intr_rate = intr_rate;
-        this.intr_rate2 = intr_rate2;
+        this.dclsMonth = dclsMonth;
+        this.finCoNo = finCoNo;
+        this.finPrdtCd = finPrdtCd;
+        this.korCoNm = korCoNm;
+        this.finPrdtNm = finPrdtNm;
+        this.joinWay = joinWay;
+        this.mtrtInt = mtrtInt;
+        this.spclCnd = spclCnd;
+        this.joinDeny = joinDeny;
+        this.joinMember = joinMember;
+        this.etcNote = etcNote;
+        this.maxLimit = maxLimit;
+        this.dclsStrtDay = dclsStrtDay;
+        this.dclsEndDay = dclsEndDay;
+        this.finCoSubmDay = finCoSubmDay;
+        this.img = img;
+        this.intrRateType = intrRateType;
+        this.intrRateTypeNm = intrRateTypeNm;
+        this.rsrvType = rsrvType;
+        this.rsrvTypeNm = rsrvTypeNm;
+        this.saveTrm = saveTrm;
+        this.intrRate = intrRate;
+        this.intrRate2 = intrRate2;
     }
 }
