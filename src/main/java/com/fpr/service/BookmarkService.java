@@ -3,6 +3,7 @@ package com.fpr.service;
 import com.fpr.domain.Bookmark;
 import com.fpr.persistence.BookmarkItemRepository;
 import com.fpr.persistence.BookmarkRepository;
+import com.fpr.persistence.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +16,14 @@ public class BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;
     private final BookmarkItemRepository bookmarkItemRepository;
-//    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 //    private final ProductRepository productRepository;
 
     // 즐겨찾기 등록
+    @Transactional
+    public void insertBookmark(Long bookmarkId){
+
+    }
 
 
     // 즐겨찾기 삭제
@@ -31,7 +36,7 @@ public class BookmarkService {
     // 즐겨찾기 목록 조회
     @Transactional
     public List<Bookmark> getBookmarkList(Long memberId) {
-        return bookmarkItemRepository.findAllByMemberMemberId(memberId);
+        return bookmarkRepository.findByMemberId(memberId);
     }
 
 }
