@@ -1,10 +1,11 @@
 package com.fpr.service;
 
 import com.fpr.domain.Member;
-import com.fpr.domain.RefreshToken;
+import com.fpr.domain.Product;
 import com.fpr.dto.*;
 import com.fpr.jwt.TokenProvider;
 import com.fpr.persistence.MemberRepository;
+import com.fpr.persistence.ProductRepository;
 import com.fpr.persistence.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,11 +15,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -34,6 +38,30 @@ public class AuthService {
         }
 
         Member member = memberRequestDto.toMember(passwordEncoder);
+        if(member.getAge() > 0 & member.getAge() < 30){
+            List<Product> productList = productRepository.findByJoinWay("스마트폰");
+            for (int i = 0; i < productList.size(); i++) {
+                member.addProduct(productList.get(i));
+            }
+        }
+        else if(member.getAge() >= 30 & member.getAge() < 40) {
+            List<Product> productList = productRepository.findByJoinWayContaining("인터넷");
+            for (int i = 0; i < productList.size(); i++) {
+                member.addProduct(productList.get(i));
+            }
+        }
+        else if(member.getAge() >= 40 & member.getAge() < 50) {
+            List<Product> productList = productRepository.findByJoinWayContaining("전화");
+            for (int i = 0; i < productList.size(); i++) {
+                member.addProduct(productList.get(i));
+            }
+        }
+        else{
+            List<Product> productList = productRepository.findByJoinWayContaining("영업점");
+            for (int i = 0; i < productList.size(); i++) {
+                member.addProduct(productList.get(i));
+            }
+        }
         MemberResponseDto.of(memberRepository.save(member));
 
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
