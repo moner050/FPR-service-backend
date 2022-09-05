@@ -20,10 +20,10 @@ public class CartController {
 //    }
 
     // 장바구니 목록 조회
-    @GetMapping("/cart/{memberId}")
-    public List<CartItem> getCartItemList(@PathVariable Long memberId) {
-        return cartService.getCartItemList(memberId);
-    }
+//    @GetMapping("/cart/{memberId}")
+//    public List<CartItem> getCartItemList(@PathVariable Long memberId) {
+//        return cartService.getCartItemList(memberId);
+//    }
 
     // 장바구니 삭제
     @DeleteMapping("/cart/{cartId}")
