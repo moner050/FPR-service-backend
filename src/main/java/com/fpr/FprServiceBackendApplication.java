@@ -1,9 +1,10 @@
 package com.fpr;
 
 import com.fpr.domain.Product;
-import com.fpr.dto.*;
+import com.fpr.dto.ProductBaseListDto;
+import com.fpr.dto.ProductDto;
+import com.fpr.dto.ProductOptionListDto;
 import com.fpr.persistence.ProductRepository;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +25,6 @@ public class FprServiceBackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FprServiceBackendApplication.class, args);
-    }
-
-    @Bean
-    JPAQueryFactory jpaQueryFactory(EntityManager em){
-        return new JPAQueryFactory(em);
     }
 
     @Bean
