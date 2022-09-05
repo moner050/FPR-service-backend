@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 
-    Bookmark findByMemberId(Long memberId);
+    List<Bookmark> findByMemberId(Long memberId);
 }
