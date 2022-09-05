@@ -49,7 +49,7 @@ public class Member extends BaseTime{
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Bookmark> bookmarks = new ArrayList<>();
+    private List<Product> bookmarks = new ArrayList<>();
 
     @Builder
     private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {
@@ -68,4 +68,5 @@ public class Member extends BaseTime{
             product.setMember(this);
         }
     }
+
 }
