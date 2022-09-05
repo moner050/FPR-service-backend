@@ -17,7 +17,7 @@ import java.util.List;
 public class Member extends BaseTime{
 
     @Id
-    @Column(name = "member_id")
+    @Column(name = "memberId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -46,6 +46,10 @@ public class Member extends BaseTime{
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Bookmark> bookmarks = new ArrayList<>();
 
     @Builder
     private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {
