@@ -1,5 +1,6 @@
 package com.fpr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,13 @@ public class BookmarkItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookmarkItemId;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookmark_Id")
     private Bookmark bookmark;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_Id")
-//    private Product product;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_Id")
+    private Product product;
 }
