@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -17,6 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productId")
     private Long id;
 
     @JsonIgnore
@@ -24,7 +23,12 @@ public class Product {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String prdt_div;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookmarkId")
+    private Bookmark bookmark;
+
+    private String prdtDiv;
 
     private String dclsMonth;
     private String finCoNo;
@@ -54,10 +58,10 @@ public class Product {
     private double intrRate2;
 
     @Builder
-    private Product (String prdt_div, String dclsMonth, String finCoNo, String finPrdtCd, String korCoNm, String finPrdtNm, String joinWay,
+    private Product (String prdtDiv, String dclsMonth, String finCoNo, String finPrdtCd, String korCoNm, String finPrdtNm, String joinWay,
                     String mtrtInt, String spclCnd, String joinDeny, String joinMember, String etcNote, Long maxLimit, String dclsStrtDay,
                     String dclsEndDay, String finCoSubmDay, String img, String intrRateType, String intrRateTypeNm, String rsrvType, String rsrvTypeNm, String saveTrm, double intrRate, double intrRate2){
-        this.prdt_div = prdt_div;
+        this.prdtDiv = prdtDiv;
         this.dclsMonth = dclsMonth;
         this.finCoNo = finCoNo;
         this.finPrdtCd = finPrdtCd;
@@ -82,7 +86,6 @@ public class Product {
         this.intrRate = intrRate;
         this.intrRate2 = intrRate2;
     }
-
 
     public void joinMember(Member member){
         this.member = member;
