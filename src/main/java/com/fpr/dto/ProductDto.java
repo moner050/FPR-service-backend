@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SavingDto {
+public class ProductDto {
 
-    private SavingResult result;
+    private ProductResult result;
 }

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SavingBaseListDto {
+public class ProductBaseListDto {
 
     private String dcls_month;
     private String fin_co_no;

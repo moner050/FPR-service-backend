@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SavingOptionListDto {
+public class ProductOptionListDto {
 
     private String intr_rate_type;
     private String intr_rate_type_nm;
