@@ -1,5 +1,6 @@
 package com.fpr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +44,7 @@ public class Member extends BaseTime{
     private Authority authority;
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     @Builder
@@ -62,5 +64,4 @@ public class Member extends BaseTime{
             product.setMember(this);
         }
     }
-
 }
