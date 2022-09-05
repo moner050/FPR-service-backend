@@ -22,9 +22,9 @@ public class CartService {
 
 
     // 장바구니 목록 조회
-    public List<CartItem> getCartItemList(Long memberId) {
-        return cartItemRepository.findAllByMemberMemberId(memberId);
-    }
+//    public List<CartItem> getCartItemList(Long memberId) {
+//        return cartItemRepository.findByMemberId(memberId);
+//    }
 
     // 장바구니 삭제
     @Transactional
