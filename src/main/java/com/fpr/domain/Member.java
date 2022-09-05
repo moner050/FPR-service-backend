@@ -1,11 +1,14 @@
 package com.fpr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -40,6 +43,10 @@ public class Member extends BaseTime{
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Product> products = new ArrayList<>();
+
     @Builder
     private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {
         this.username = username;
@@ -51,4 +58,10 @@ public class Member extends BaseTime{
         this.authority = authority;
     }
 
+    public void addProduct(Product product){
+        this.products.add(product);
+        if(product.getMember() != this){
+            product.setMember(this);
+        }
+    }
 }
