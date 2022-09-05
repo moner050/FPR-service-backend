@@ -62,7 +62,7 @@ public class FprServiceBackendApplication {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<ProductDto> DepositProduct = restTemplate.getForEntity(uriComponents.toString(), ProductDto.class);
             int cnt = DepositProduct.getBody().getResult().getTotal_count();
-            String prdt_div = DepositProduct.getBody().getResult().getPrdt_div();
+            String prdtDiv = DepositProduct.getBody().getResult().getPrdt_div();
 
             List<ProductBaseListDto> depositBaseList = DepositProduct.getBody().getResult().getBaseList();
             List<ProductOptionListDto> depositOptionList = DepositProduct.getBody().getResult().getOptionList();
@@ -71,7 +71,7 @@ public class FprServiceBackendApplication {
                 String img = bankImg.get(depositBaseList.get(i).getKor_co_nm()) == null ? "" : bankImg.get(depositBaseList.get(i).getKor_co_nm());
 
                 Product depositProduct = Product.builder()
-                        .prdt_div(prdt_div)
+                        .prdtDiv(prdtDiv)
                         .dclsMonth(depositBaseList.get(i).getDcls_month())
                         .finCoNo(depositBaseList.get(i).getFin_co_no())
                         .finPrdtCd(depositBaseList.get(i).getFin_prdt_cd())
@@ -107,7 +107,7 @@ public class FprServiceBackendApplication {
             restTemplate = new RestTemplate();
             ResponseEntity<ProductDto> SavingResponse = restTemplate.getForEntity(uriComponents.toString(), ProductDto.class);
             cnt = SavingResponse.getBody().getResult().getTotal_count();
-            prdt_div = SavingResponse.getBody().getResult().getPrdt_div();
+            prdtDiv = SavingResponse.getBody().getResult().getPrdt_div();
 
             List<ProductBaseListDto> SavingBaseList = SavingResponse.getBody().getResult().getBaseList();
             List<ProductOptionListDto> SavingOptionList = SavingResponse.getBody().getResult().getOptionList();
@@ -116,7 +116,7 @@ public class FprServiceBackendApplication {
                 String img = bankImg.get(SavingBaseList.get(i).getKor_co_nm() == null ? "" : SavingBaseList.get(i).getKor_co_nm());
 
                 Product savingProduct = Product.builder()
-                        .prdt_div(prdt_div)
+                        .prdtDiv(prdtDiv)
                         .dclsMonth(SavingBaseList.get(i).getDcls_month())
                         .finCoNo(SavingBaseList.get(i).getFin_co_no())
                         .finPrdtCd(SavingBaseList.get(i).getFin_prdt_cd())
