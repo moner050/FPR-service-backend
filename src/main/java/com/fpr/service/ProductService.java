@@ -13,28 +13,44 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    public List<Product> list(){
-        return productRepository.findAll();
-    }
-
+    // 상품 정보
     @Transactional(readOnly = true)
     public Product searchOne(Long id) {
         Optional<Product> product = productRepository.findById(id);
         return product.orElseThrow(() -> new RuntimeException("검색된 제품이 없습니다"));
     }
 
+    // 예적금 전체
     @Transactional
     public List<Product> searchAll() {
-        List<Product> savings = productRepository.findAll();
+        List<Product> product = productRepository.findAll();
+        if(product.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return product;
+    }
+
+    // 예적금 전체 검색
+    @Transactional
+    public List<Product> searchProduct(String korCoNm) {
+        List<Product> product = productRepository.findByKorCoNmContaining(korCoNm);
+        if(product.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return product;
+    }
+
+    // 예금 전체 목록
+    @Transactional
+    public List<Product> searchSavingAll() {
+        List<Product> savings = productRepository.findByPrdtDiv(PrtdDiv.S.getKey());
         if(savings.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
         return savings;
     }
 
-    public List<Product> searchProduct(String korCoNm) {
-        List<Product> savings = productRepository.findByKorCoNmContaining(korCoNm);
-        if(savings.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
-        return savings;
+    // 적금 전체 목록
+    @Transactional
+    public List<Product> searchDepositAll() {
+        List<Product> deposits = productRepository.findByPrdtDiv(PrtdDiv.D.getKey());
+        if(deposits.isEmpty()) throw new RuntimeException("검색된 제품이 없습니다");
+        return deposits;
     }
 }
