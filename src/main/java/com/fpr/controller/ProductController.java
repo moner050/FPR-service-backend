@@ -18,37 +18,36 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("/product/saving/list")
-    public ResponseEntity<List<Product>> savingAll() {
+    // 예적금 전체
+    @GetMapping("/product/list")
+    public ResponseEntity<List<Product>> productAll() {
         List<Product> product = productService.searchAll();
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    @PostMapping("/product/saving/detail")
+    // 상품 정보
+    @PostMapping("/product/list/detail")
     public ResponseEntity<Product> savingDetail(Long id) {
         Product product = productService.searchOne(id);
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    @PostMapping("/product/saving/{korCoNm}")
-    public ResponseEntity<List<Product>> savingSearch(@PathVariable("korCoNm") String korCoNm) {
-        List<Product> product = productService.searchProduct(korCoNm);
+    // 예금 전체
+    @GetMapping("/product/list/saving")
+    public ResponseEntity<List<Product>> savingAll() {
+        List<Product> product = productService.searchSavingAll();
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    @GetMapping("/product/deposit/list")
+    // 적금 전체
+    @GetMapping("/product/list/deposit")
     public ResponseEntity<List<Product>> depositAll() {
-        List<Product> product = productService.searchAll();
+        List<Product> product = productService.searchDepositAll();
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    @PostMapping("/product/deposit/detail")
-    public ResponseEntity<Product> depositDetail(Long id) {
-        Product product = productService.searchOne(id);
-        return new ResponseEntity(product, HttpStatus.OK);
-    }
-
-    @PostMapping("/product/deposit/{korCoNm}")
+    // 예적금 전체 검색
+    @PostMapping("/product/list/{korCoNm}")
     public ResponseEntity<List<Product>> depositSearch(@PathVariable("korCoNm") String korCoNm) {
         List<Product> product = productService.searchProduct(korCoNm);
         return new ResponseEntity(product, HttpStatus.OK);
