@@ -3,6 +3,7 @@ package com.fpr.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -10,18 +11,28 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "CART")
+@Table(name = "cart")
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cartId")
     private Long cartId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "memberId")
-    private Member member;
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CartItem> cartItems;
+    public void addProduct(Product product){
+        this.products.add(product);
+        if(product.getCart() != this){
+            product.setCart(this);
+        }
+    }
+
+    public void removeProduct(Product product){
+        this.products.remove(product);
+        if(product.getCart() != this){
+            product.setCart(this);
+        }
+    }
 
 }
