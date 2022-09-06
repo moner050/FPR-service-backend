@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,18 +15,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "bookmark")
 public class Bookmark {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookmarkId")
     private Long bookmarkId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "memberId")
+    @OneToMany(mappedBy = "bookmark",cascade = CascadeType.ALL)
     @JsonIgnore
-    private Member member;
+    private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy = "bookmark", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BookmarkItem> bookmarkItems;
-
+    public void addProduct(Product product){
+        this.products.add(product);
+        if(product.getBookmark() != this){
+            product.setBookmark(this);
+        }
+    }
 }
