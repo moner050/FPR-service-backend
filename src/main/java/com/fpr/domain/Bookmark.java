@@ -1,6 +1,5 @@
 package com.fpr.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,17 @@ public class Bookmark {
     private Long bookmarkId;
 
     @OneToMany(mappedBy = "bookmark",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product){
         this.products.add(product);
+        if(product.getBookmark() != this){
+            product.setBookmark(this);
+        }
+    }
+
+    public void removeProduct(Product product){
+        this.products.remove(product);
         if(product.getBookmark() != this){
             product.setBookmark(this);
         }
