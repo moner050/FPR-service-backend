@@ -18,7 +18,7 @@ public class BookmarkResponseDto {
 
     private List<Product> products = new ArrayList<>();
 
-//    public static BookmarkResponseDto of(Bookmark bookmark) {
-//        return new BookmarkResponseDto (bookmark);
-//    }
+    public static BookmarkResponseDto of(Bookmark bookmark) {
+        return new BookmarkResponseDto (bookmark.getProducts());
+    }
 }
