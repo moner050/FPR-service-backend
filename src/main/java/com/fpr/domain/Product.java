@@ -28,6 +28,11 @@ public class Product {
     @JoinColumn(name = "bookmarkId")
     private Bookmark bookmark;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cartId")
+    private Cart cart;
+
     private String prdtDiv;
 
     private String dclsMonth;
