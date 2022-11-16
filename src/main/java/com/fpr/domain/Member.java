@@ -1,5 +1,6 @@
 package com.fpr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.List;
 public class Member extends BaseTime{
 
     @Id
-    @Column(name = "member_id")
+    @Column(name = "memberId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -43,7 +44,12 @@ public class Member extends BaseTime{
     private Authority authority;
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Product> bookmarks = new ArrayList<>();
 
     @Builder
     private Member(String username, int age, String job, String email, String password, String phoneNumber, Authority authority) {

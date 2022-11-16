@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DepositDto {
+public class ProductDto {
 
-    private DepositResult result;
+    private ProductResult result;
 }

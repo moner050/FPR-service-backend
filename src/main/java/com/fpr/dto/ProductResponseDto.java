@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class SavingResponseDto<T> {
+public class ProductResponseDto<T> {
     int status;
     T data;
 
-    public SavingResponseDto(T value, T i) {
+    public ProductResponseDto(T value, T i) {
     }
 }

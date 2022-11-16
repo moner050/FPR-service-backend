@@ -27,9 +27,11 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(FprApiInfo())
                 .tags( new Tag("member-controller", "맴버정보 조회"))
-                .tags( new Tag("auth-controller", "회원가입/로그인 토큰 재발급"))
-                .tags( new Tag("saving-controller", "예금"))
-                .tags( new Tag("deposit-controller", "적금"));
+                .tags( new Tag("auth-controller", "회원가입/로그인"))
+                .tags( new Tag("product-controller", "예/적금 조회 및 검색"))
+                .tags( new Tag("bookmark-controller", "즐겨찾기"))
+                .tags( new Tag("cart-controller", "장바구니"))
+                ;
     }
 
     private ApiInfo FprApiInfo(){

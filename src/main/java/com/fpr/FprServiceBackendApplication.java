@@ -1,10 +1,10 @@
 package com.fpr;
 
-import com.fpr.domain.Deposit;
-import com.fpr.domain.Saving;
-import com.fpr.dto.*;
-import com.fpr.persistence.DepositRepository;
-import com.fpr.persistence.SavingRepository;
+import com.fpr.domain.Product;
+import com.fpr.dto.ProductBaseListDto;
+import com.fpr.dto.ProductDto;
+import com.fpr.dto.ProductOptionListDto;
+import com.fpr.persistence.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +28,7 @@ public class FprServiceBackendApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(DepositRepository depositRepository, SavingRepository savingRepository) {
+    public CommandLineRunner initData(ProductRepository productRepository) {
         Map<String, String> bankImg = new HashMap<>();
         bankImg.put("하나은행", "https://blog.kakaocdn.net/dn/cdNxCH/btqyU8rQfKP/adu2Kzot3kNW5sK1r9ekd0/img.jpg");
         bankImg.put("부산은행", "https://blog.kakaocdn.net/dn/18TFu/btqyWKDIInm/GfE8079nzAF9txBlV71XS0/img.jpg");
@@ -60,17 +60,18 @@ public class FprServiceBackendApplication {
                     .queryParam("pageNo", 1).build();
 
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<DepositDto> DepositResponse = restTemplate.getForEntity(uriComponents.toString(), DepositDto.class);
-            int cnt = DepositResponse.getBody().getResult().getTotal_count();
+            ResponseEntity<ProductDto> DepositProduct = restTemplate.getForEntity(uriComponents.toString(), ProductDto.class);
+            int cnt = DepositProduct.getBody().getResult().getTotal_count();
+            String prdtDiv = DepositProduct.getBody().getResult().getPrdt_div();
 
-            List<DepositBaseListDto> depositBaseList = DepositResponse.getBody().getResult().getBaseList();
-            List<DepositOptionListDto> depositOptionList = DepositResponse.getBody().getResult().getOptionList();
+            List<ProductBaseListDto> depositBaseList = DepositProduct.getBody().getResult().getBaseList();
+            List<ProductOptionListDto> depositOptionList = DepositProduct.getBody().getResult().getOptionList();
 
             for (int i = 0; i < cnt; i++) {
                 String img = bankImg.get(depositBaseList.get(i).getKor_co_nm()) == null ? "" : bankImg.get(depositBaseList.get(i).getKor_co_nm());
 
-                Deposit deposit = Deposit.builder()
-                        .id(Long.parseLong(String.valueOf(i)))
+                Product depositProduct = Product.builder()
+                        .prdtDiv(prdtDiv)
                         .dclsMonth(depositBaseList.get(i).getDcls_month())
                         .finCoNo(depositBaseList.get(i).getFin_co_no())
                         .finPrdtCd(depositBaseList.get(i).getFin_prdt_cd())
@@ -94,7 +95,7 @@ public class FprServiceBackendApplication {
                         .intrRate2(depositOptionList.get(i).getIntr_rate2())
                         .build();
 
-                depositRepository.save(deposit);
+                productRepository.save(depositProduct);
             }
 
             url = "http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json";
@@ -104,17 +105,18 @@ public class FprServiceBackendApplication {
                     .queryParam("pageNo", 1).build();
 
             restTemplate = new RestTemplate();
-            ResponseEntity<SavingDto> SavingResponse = restTemplate.getForEntity(uriComponents.toString(), SavingDto.class);
+            ResponseEntity<ProductDto> SavingResponse = restTemplate.getForEntity(uriComponents.toString(), ProductDto.class);
             cnt = SavingResponse.getBody().getResult().getTotal_count();
+            prdtDiv = SavingResponse.getBody().getResult().getPrdt_div();
 
-            List<SavingBaseListDto> SavingBaseList = SavingResponse.getBody().getResult().getBaseList();
-            List<SavingOptionListDto> SavingOptionList = SavingResponse.getBody().getResult().getOptionList();
+            List<ProductBaseListDto> SavingBaseList = SavingResponse.getBody().getResult().getBaseList();
+            List<ProductOptionListDto> SavingOptionList = SavingResponse.getBody().getResult().getOptionList();
 
             for (int i = 0; i < cnt; i++) {
                 String img = bankImg.get(SavingBaseList.get(i).getKor_co_nm() == null ? "" : SavingBaseList.get(i).getKor_co_nm());
 
-                Saving saving = Saving.builder()
-                        .id(Long.parseLong(String.valueOf(i)))
+                Product savingProduct = Product.builder()
+                        .prdtDiv(prdtDiv)
                         .dclsMonth(SavingBaseList.get(i).getDcls_month())
                         .finCoNo(SavingBaseList.get(i).getFin_co_no())
                         .finPrdtCd(SavingBaseList.get(i).getFin_prdt_cd())
@@ -140,7 +142,7 @@ public class FprServiceBackendApplication {
                         .intrRate2(SavingOptionList.get(i).getIntr_rate2())
                         .build();
 
-                savingRepository.save(saving);
+                productRepository.save(savingProduct);
             }
         };
     }
