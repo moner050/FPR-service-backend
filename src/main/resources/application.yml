@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: mysql, jwt
+    include: mysql, jwt, redis
 
   mvc:
     pathmatch:
