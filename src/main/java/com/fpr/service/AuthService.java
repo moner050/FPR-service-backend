@@ -2,11 +2,14 @@ package com.fpr.service;
 
 import com.fpr.domain.Member;
 import com.fpr.domain.Product;
-import com.fpr.dto.*;
+import com.fpr.dto.LoginDto;
+import com.fpr.dto.MemberRequestDto;
+import com.fpr.dto.MemberResponseDto;
+import com.fpr.dto.TokenDto;
 import com.fpr.jwt.TokenProvider;
 import com.fpr.persistence.MemberRepository;
 import com.fpr.persistence.ProductRepository;
-import com.fpr.persistence.RefreshTokenRepository;
+import com.fpr.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.fpr.jwt.TokenProvider.REFRESH_TOKEN_EXPIRE_TIME;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -25,7 +30,7 @@ public class AuthService {
     private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RedisUtil redisUtil;
 
     @Transactional
     public TokenDto signup(MemberRequestDto memberRequestDto) {
@@ -74,13 +79,8 @@ public class AuthService {
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
 
-//        // 4. RefreshToken 저장
-//        RefreshToken refreshToken = RefreshToken.builder()
-//                .key(authentication.getName())
-//                .value(tokenDto.getRefreshToken())
-//                .build();
-//
-//        refreshTokenRepository.save(refreshToken);
+        // 4. RefreshToken 저장
+        redisUtil.setDataExpire(authentication.getName(), tokenDto.getRefreshToken(), REFRESH_TOKEN_EXPIRE_TIME);
 
         // 5. 토큰 발급
         return tokenDto;
