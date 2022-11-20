@@ -11,7 +11,7 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class RedisUtil {
 
-    private StringRedisTemplate stringRedisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
     public String getData(String key){
         ValueOperations<String,String> valueOperations = stringRedisTemplate.opsForValue();
