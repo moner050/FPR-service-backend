@@ -9,13 +9,15 @@ import lombok.*;
 @AllArgsConstructor
 public class BookmarkResponseDto {
 
+    private Long productId;
     private String korCoNm;
     private String finPrdtNm;
     private String mtrtInt;
     private Long maxLimit;
 
     public static BookmarkResponseDto of(Product product) {
-        return new BookmarkResponseDto (product.getKorCoNm(),
+        return new BookmarkResponseDto (product.getId(),
+                product.getKorCoNm(),
                 product.getFinPrdtNm(),
                 product.getMtrtInt(),
                 product.getMaxLimit());
