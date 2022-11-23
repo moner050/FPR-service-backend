@@ -51,11 +51,11 @@ public class CartService {
 
     // 장바구니 단일 삭제
     @Transactional
-    public void deleteCartItem(Long memberId, Long cartItemId) {
+    public void deleteCartItem(Long memberId, Long productId) {
         Cart cart = cartRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("장바구니가 존재하지 않습니다."));
 
-        CartItem cartItem = cartItemRepository.findByCartIdAndId(cart.getId(), cartItemId)
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId)
                         .orElseThrow(() -> new RuntimeException("검색된 장바구니 목록이 없습니다."));
 
         cartItemRepository.delete(cartItem);
