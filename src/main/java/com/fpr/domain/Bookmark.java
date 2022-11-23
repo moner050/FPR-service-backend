@@ -18,7 +18,7 @@ import java.util.List;
 public class Bookmark {
 
     @Id
-    @Column(name = "bookmarkId")
+    @Column(name = "bookmark_id")
     private Long bookmarkId;
 
     @OneToMany(mappedBy = "bookmark",cascade = CascadeType.ALL)
