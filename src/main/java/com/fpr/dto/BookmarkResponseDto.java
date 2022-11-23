@@ -1,24 +1,23 @@
 package com.fpr.dto;
 
-import com.fpr.domain.Bookmark;
 import com.fpr.domain.Product;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class BookmarkResponseDto {
 
-    private List<Product> products = new ArrayList<>();
+    private String korCoNm;
+    private String finPrdtNm;
+    private String mtrtInt;
+    private Long maxLimit;
 
-    public static BookmarkResponseDto of(Bookmark bookmark) {
-        return new BookmarkResponseDto (bookmark.getProducts());
+    public static BookmarkResponseDto of(Product product) {
+        return new BookmarkResponseDto (product.getKorCoNm(),
+                product.getFinPrdtNm(),
+                product.getMtrtInt(),
+                product.getMaxLimit());
     }
 }
