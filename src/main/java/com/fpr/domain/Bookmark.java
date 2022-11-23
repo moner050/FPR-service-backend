@@ -1,40 +1,33 @@
 package com.fpr.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "bookmark")
-public class Bookmark {
+public class Bookmark extends BaseTime{
 
     @Id
     @Column(name = "bookmark_id")
-    private Long bookmarkId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @OneToMany(mappedBy = "bookmark",cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
+    private List<BookmarkItem> bookmarkItems = new ArrayList<>();
 
-    public void addProduct(Product product){
-        this.products.add(product);
-        if(product.getBookmark() != this){
-            product.setBookmark(this);
-        }
+    @Builder
+    public Bookmark(Member member) {
+        this.member = member;
     }
 
-    public void removeProduct(Product product){
-        this.products.remove(product);
-        if(product.getBookmark() != this){
-            product.setBookmark(this);
-        }
-    }
 }
