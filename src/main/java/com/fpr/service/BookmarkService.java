@@ -51,11 +51,11 @@ public class BookmarkService {
 
     // 즐겨찾기 단일 삭제
     @Transactional
-    public void deleteBookmark(Long memberId, Long bookmarkItemId) {
+    public void deleteBookmark(Long memberId, Long productId) {
         Bookmark bookmark = bookmarkRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new RuntimeException("즐겨찾기가 존재하지 않습니다."));
 
-        BookmarkItem bookmarkItem = bookmarkItemRepository.findByBookmarkIdAndId(bookmark.getId(), bookmarkItemId)
+        BookmarkItem bookmarkItem = bookmarkItemRepository.findByBookmarkIdAndProductId(bookmark.getId(), productId)
                 .orElseThrow(() -> new RuntimeException("검색된 즐겨찾기 목록이 없습니다."));
 
         bookmarkItemRepository.delete(bookmarkItem);
