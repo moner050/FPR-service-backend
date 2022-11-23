@@ -17,7 +17,7 @@ import java.util.List;
 public class Member extends BaseTime{
 
     @Id
-    @Column(name = "memberId")
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
