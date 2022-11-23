@@ -7,32 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "cart")
-public class Cart {
+public class Cart extends BaseTime{
 
     @Id
-    @Column(name = "cartId")
-    private Long cartId;
+    @Column(name = "cart_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
-    public void addProduct(Product product){
-        this.products.add(product);
-        if(product.getCart() != this){
-            product.setCart(this);
-        }
+    @Builder
+    public Cart(Member member) {
+        this.member = member;
     }
-
-    public void removeProduct(Product product){
-        this.products.remove(product);
-        if(product.getCart() != this){
-            product.setCart(this);
-        }
-    }
-
 }
