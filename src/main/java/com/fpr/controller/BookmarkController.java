@@ -37,9 +37,9 @@ public class BookmarkController {
     }
 
     // 즐겨찾기 단일 삭제
-    @DeleteMapping("/bookmark/{bookmarkItemId}")
-    public void deleteOneBookmark(@PathVariable("bookmarkItemId") Long bookmarkItemId) {
-        bookmarkService.deleteBookmark(SecurityUtil.getCurrentMemberId(), bookmarkItemId);
+    @DeleteMapping("/bookmark/{productId}")
+    public void deleteOneBookmark(@PathVariable("productId") Long productId) {
+        bookmarkService.deleteBookmark(SecurityUtil.getCurrentMemberId(), productId);
     }
 
 
