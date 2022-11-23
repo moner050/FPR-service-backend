@@ -37,8 +37,8 @@ public class CartController {
     }
 
     // 장바구니 단품 삭제
-    @DeleteMapping("/cart/{cartItemId}")
-    public void deleteCartItem(@PathVariable Long cartItemId) {
-        cartService.deleteCartItem(SecurityUtil.getCurrentMemberId(), cartItemId);
+    @DeleteMapping("/cart/{productId}")
+    public void deleteCartItem(@PathVariable Long productId) {
+        cartService.deleteCartItem(SecurityUtil.getCurrentMemberId(), productId);
     }
 }
