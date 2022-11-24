@@ -41,7 +41,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests()
                 .antMatchers(swaggerList).permitAll()
-                .antMatchers( "/", "/auth/**", "/product/**").permitAll()
+                .antMatchers( "/", "/auth/**", "/product/**", "/products/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
