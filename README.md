@@ -36,3 +36,34 @@
 - 장바구니 (Cart)
   - 장바구니 등록, 장바구니 목록 조회, 장바구니 삭제
 
+## 📂 프로젝트 DB 모델링
+![ ](./fpr_diagram.PNG)
+
+> member : 회원 정보 테이블  
+> product : 여행상품 정보 테이블  
+> cart : 회원 장바구니 테이블  
+> cart_item : 회원 장바구니 목록 테이블  
+> bookmark : 회원 즐겨찾기 테이블  
+> bookmark_item : 회원 즐겨찾기 목록 테이블  
+
+## 📜 프로젝트 API 명세서
+
+|Function|Method|End Point|Token|
+|---|---|---|:---:|
+|회원가입|POST|/auth/login|X|
+|로그인|POST|/auth/signup|X|
+|회원정보 조회|GET|/member/{id}|O|
+|내정보 조회|GET|/member/me|O|
+|전체 예적금 상품 조회|GET|/products|X|
+|전체 예적금 상품 검색|GET|/products/{korCoNm}|X|
+|전체 예금상품 조회|GET|/products/deposit|X|
+|전체 적금상품 조회|GET|/products/saving|X|
+|예적금 상품 상세조회|GET|/product/{id}|X|
+|장바구니 담기|POST|/cart/{productId}|O|
+|장바구니 단일 삭제|DELETE|/cart/{productId}|O|
+|장바구니 전체목록 보기|GET|/carts|O|
+|장바구니 전체목록 삭제|DELETE|/carts|O|
+|즐겨찾기 담기|POST|/bookmark/{productId}|O|
+|즐겨찾기 단일 삭제|DELETE|/bookmark/{productId}|O|
+|즐겨찾기 전체목록 보기|GET|/bookmarks|O|
+|즐겨찾기 전체목록 삭제|DELETE|/bookmarks|O|
