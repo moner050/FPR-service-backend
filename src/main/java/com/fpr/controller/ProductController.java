@@ -19,37 +19,37 @@ public class ProductController {
     private final ProductService productService;
 
     // 예적금 전체
-    @GetMapping("/product/list")
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> productAll() {
         List<Product> product = productService.searchAll();
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    // 상품 정보
-    @PostMapping("/product/list/detail")
-    public ResponseEntity<Product> savingDetail(Long id) {
+    // 상품 상세 정보
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> savingDetail(@PathVariable("id") Long id) {
         Product product = productService.searchOne(id);
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     // 예금 전체
-    @GetMapping("/product/list/saving")
+    @GetMapping("/products/saving")
     public ResponseEntity<List<Product>> savingAll() {
         List<Product> product = productService.searchSavingAll();
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     // 적금 전체
-    @GetMapping("/product/list/deposit")
+    @GetMapping("/products/deposit")
     public ResponseEntity<List<Product>> depositAll() {
         List<Product> product = productService.searchDepositAll();
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     // 예적금 전체 검색
-    @PostMapping("/product/list/{korCoNm}")
-    public ResponseEntity<List<Product>> depositSearch(@PathVariable("korCoNm") String korCoNm) {
+    @GetMapping("/products/{korCoNm}")
+    public ResponseEntity<List<Product>> searchProducts(@PathVariable("korCoNm") String korCoNm) {
         List<Product> product = productService.searchProduct(korCoNm);
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }
