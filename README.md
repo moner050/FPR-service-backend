@@ -50,8 +50,8 @@
 
 |Function|Method|End Point|Token|
 |---|---|---|:---:|
-|회원가입|POST|/auth/login|X|
-|로그인|POST|/auth/signup|X|
+|회원가입|POST|/auth/signup|X|
+|로그인|POST|/auth/login|X|
 |회원정보 조회|GET|/member/{id}|O|
 |내정보 조회|GET|/member/me|O|
 |전체 예적금 상품 조회|GET|/products|X|
